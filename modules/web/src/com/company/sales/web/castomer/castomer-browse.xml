@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://browseCaption"
+        focusComponent="castomersTable"
+        messagesPack="com.company.sales.web.castomer">
+    <data readOnly="true">
+        <collection id="castomersDc"
+                    class="com.company.sales.entity.Castomer"
+                    view="_local">
+            <loader id="castomersDl">
+                <query>
+                    <![CDATA[select e from sales_Castomer e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="castomersTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="castomersTable"
+                dataLoader="castomersDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="castomersTable"
+                    width="100%"
+                    dataContainer="castomersDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="name"/>
+                <column id="email"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="castomersTable.create"/>
+                <button id="editBtn" action="castomersTable.edit"/>
+                <button id="removeBtn" action="castomersTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>
